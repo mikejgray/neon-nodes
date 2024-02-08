@@ -1,0 +1,10 @@
+neon-utils[network]~=1.8,>=1.8.3a4
+ovos-dinkum-listener~=0.0.2,>=0.0.3a27
+ovos-vad-plugin-silero~=0.0.1
+ovos-microphone-plugin-alsa~=0.0.0
+# ovos-microphone-plugin-sounddevice  Not working on Mark2 where alsa is
+ovos-ww-plugin-precise-lite[tflite]~=0.1
+pydub~=0.25
+SpeechRecognition~=3.10
+sdnotify~=0.3
+requests~=2.28
