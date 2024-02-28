@@ -15,3 +15,9 @@ jobs:
     with:
       version_file: "neon_nodes/version.py"
       publish_prerelease: true
+  trigger_build:
+    uses: peter-evans/repository-dispatch@v3
+    with:
+      repository: neongeckocom/neon-os
+      event-type: release
+      client-payload: '{"ref": "dev", "repo": "neon-debos"}'
