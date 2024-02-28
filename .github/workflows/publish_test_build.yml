@@ -24,5 +24,9 @@ jobs:
         with:
           token: ${{secrets.NEON_OS_TOKEN}}
           repository: neongeckocom/neon-os
-          event-type: release
-          client-payload: '{"ref": "dev", "repo": "neon-debos"}'
+          event-type: Publish Release
+          client-payload: |-
+            {
+              "ref": "dev",
+              "repo": "neon-nodes"
+            }
