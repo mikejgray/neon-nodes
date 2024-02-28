@@ -1,5 +1,5 @@
-neon-utils[network]~=1.8,>=1.8.3a4
-ovos-dinkum-listener~=0.0.2,>=0.0.3a27
+neon-utils[network]~=1.9
+ovos-dinkum-listener==0.0.3a29
 ovos-vad-plugin-silero~=0.0.1
 ovos-microphone-plugin-alsa~=0.0.0
 # ovos-microphone-plugin-sounddevice  Not working on Mark2 where alsa is
