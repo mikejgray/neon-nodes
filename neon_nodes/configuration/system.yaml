@@ -1,0 +1,41 @@
+neon_node:
+  description: Neon Node
+microphone:
+  module: ovos-microphone-plugin-alsa
+listener:
+  wake_word: hey_mycroft
+  stand_up_word: ""
+  VAD:
+    silence_method: vad_only
+    speech_seconds: 0.1
+    silence_seconds: 0.5
+    before_seconds: 0.5
+    min_seconds: 1
+    max_current_ratio_threshold: 2
+    initial_energy_threshold: 1000.0
+    module: ovos-vad-plugin-silero
+  mute_during_output: true
+  instant_listen: false
+  enable_stt_api: false
+  # amount of time to wait for speech to start after WW detection
+  speech_begin: 0.5
+  # amount of time without speech to wait before stopping listening
+  silence_end: 0.9
+  # number of audio chunks from WW detection to include in STT audio
+  utterance_chunks_to_rewind: 1
+  wakeword_chunks_to_save: 15
+hotwords:
+  hey_mycroft:
+    module: ovos-ww-plugin-precise-lite
+    model: /opt/neon/hey_mycroft.tflite
+    expected_duration: 3
+    trigger_level: 3
+    sensitivity: 0.5
+    listen: true
+  wake_up:
+    enabled: false
+  wake_up_vosk:
+    enabled: false
+logs:
+  path: stdout
+  level: DEBUG

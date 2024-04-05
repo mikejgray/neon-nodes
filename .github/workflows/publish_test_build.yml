@@ -1,0 +1,32 @@
+# This workflow will generate a distribution and upload it to PyPI
+
+name: Publish Alpha Build
+on:
+  push:
+    branches:
+      - dev
+    paths-ignore:
+      - 'neon_nodes/version.py'
+
+jobs:
+  publish_alpha_release:
+    uses: neongeckocom/.github/.github/workflows/publish_alpha_release.yml@master
+    secrets: inherit
+    with:
+      version_file: "neon_nodes/version.py"
+      publish_prerelease: true
+  trigger_os_build:
+    runs-on: ubuntu-latest
+    needs: publish_alpha_release
+    steps:
+      - name: Call Release Action
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{secrets.NEON_OS_TOKEN}}
+          repository: neongeckocom/neon-os
+          event-type: Publish Release
+          client-payload: |-
+            {
+              "ref": "dev",
+              "repo": "neon-nodes"
+            }
