@@ -23,3 +23,30 @@
 # LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE,  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+from mock import Mock
+from ovos_utils.log import LOG
+
+class MockTransformers(Mock):
+    def transform(self, chunk):
+        return chunk, dict()
+
+
+def on_ready():
+    LOG.info("ready")
+
+
+def on_stopping():
+    LOG.info("stopping")
+
+
+def on_error(e="unknown"):
+    LOG.error(e)
+
+
+def on_alive():
+    LOG.debug("alive")
+
+
+def on_started():
+    LOG.debug("started")
