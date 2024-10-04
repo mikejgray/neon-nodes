@@ -24,7 +24,9 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE,  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import queue
 from os import environ
+from queue import Queue
 
 from ovos_utils import wait_for_exit_signal
 
@@ -95,11 +97,13 @@ class NeonAudioStreamClient:
                                       on_close=ws_disconnect)
         self.streaming_socket = WebSocketApp(
             f"{ws_address}/node/v1/stream?token={auth_data['access_token']}",
-            on_message=self._on_ws_data,
+            on_message=self._on_ws_stream,
             on_open=ws_connect,
             on_error=ws_error,
             on_close=ws_disconnect)
         Thread(target=self.websocket.run_forever, daemon=True).start()
+        self._wait_for_connection()
+        self._connected.clear()
         Thread(target=self.streaming_socket.run_forever, daemon=True).start()
         self._device_data = self.config.get('neon_node', {})
         LOG.init(self.config.get("logging"))
@@ -107,6 +111,8 @@ class NeonAudioStreamClient:
         self.lang = self.config.get('lang') or "en-us"
         self._mic = OVOSMicrophoneFactory.create(self.config)
         self._mic.start()
+
+        self.response_audio_queue = Queue()
 
         self._listening_sound = None
         self._error_sound = None
@@ -189,6 +195,10 @@ class NeonAudioStreamClient:
         """
         return get_default_user_config()
 
+    def _on_ws_stream(self, _, wav_bytes, *__):
+        LOG.info(f"len(wav_bytes): {len(wav_bytes)}")
+        self.response_audio_queue.put(wav_bytes)
+
     def _on_ws_data(self, _, serialized: str):
         try:
             message = Message.deserialize(serialized)
@@ -202,6 +212,13 @@ class NeonAudioStreamClient:
         """
         self._stopping = False
         while not self._stopping:
+            try:
+                if audio_bytes := self.response_audio_queue.get(block=False):
+                    LOG.info(f"Play response audio")
+                    play(AudioSegment.from_file(io.BytesIO(audio_bytes),
+                                                format="wav"))
+            except queue.Empty:
+                pass
             byte_audio = self._mic.read_chunk()
             self.streaming_socket.send(byte_audio, ABNF.OPCODE_BINARY)
 
@@ -260,13 +277,15 @@ class NeonAudioStreamClient:
 
     def on_response(self, message: Message):
         if message.msg_type == "klat.response":
-            LOG.info(f"Response="
-                     f"{message.data['responses'][self.lang]['sentence']}")
-            encoded_audio = message.data['responses'][self.lang]['audio']
-            audio_bytes = b64decode(encoded_audio.get('female') or
-                                    encoded_audio.get('male'))
-            play(AudioSegment.from_file(io.BytesIO(audio_bytes), format="wav"))
-            LOG.info(f"Playback completed")
+            # Handled as audio stream
+            pass
+            # LOG.info(f"Response="
+            #          f"{message.data['responses'][self.lang]['sentence']}")
+            # encoded_audio = message.data['responses'][self.lang]['audio']
+            # audio_bytes = b64decode(encoded_audio.get('female') or
+            #                         encoded_audio.get('male'))
+            # play(AudioSegment.from_file(io.BytesIO(audio_bytes), format="wav"))
+            # LOG.info(f"Playback completed")
         elif message.msg_type == "neon.ww_detected":
             play(self.listening_sound)
         elif message.msg_type == "neon.alert_expired":
@@ -283,6 +302,7 @@ class NeonAudioStreamClient:
         self._stopping = True
         self.stopping_hook()
         self._connected.clear()
+        self.response_audio_queue.put(None)
         self.websocket.close()
         self._voice_thread.join(30)
 
