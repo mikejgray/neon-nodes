@@ -13,6 +13,12 @@ The websocket client starts a local listener service and establishes a websocket
 connection to a remove HANA server. Compared to the Voice Client, this has 
 lower latency and allows for asynchronous messages from the HANA server.
 
+## Streaming Audio Client
+This client creates a Microphone object locally and sends raw chunks of audio to
+a remote handler. Responses are wav audio in a `bytes` representation. Byte
+messages are sent over a dedicated websocket, in addition to the websocket used
+by the [Websocket Client](#websocket-client) that handles JSON messages.
+
 ## Configuration
 This service is configured via `~/.config/neon/neon.yaml`.
 
