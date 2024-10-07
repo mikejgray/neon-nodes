@@ -39,7 +39,7 @@ import requests
 
 from os.path import join, isfile, dirname
 from threading import Thread, Event
-from base64 import b64decode, b64encode
+from base64 import b64encode
 
 from ovos_plugin_manager.microphone import OVOSMicrophoneFactory
 from ovos_config.config import Configuration
