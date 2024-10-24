@@ -5,7 +5,8 @@ neon_node:
   hana_username: neon
   hana_password: neon
 microphone:
-  module: ovos-microphone-plugin-alsa
+  module: ovos-microphone-plugin-alsa # Comment this line for Mac OS
+  # module: ovos-microphone-plugin-pyaudio # Uncomment this line for Mac OS
 listener:
   sample_rate: 16000
   wake_word: hey_mycroft

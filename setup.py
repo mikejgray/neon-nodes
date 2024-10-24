@@ -73,8 +73,11 @@ setup(
     author_email='developers@neon.ai',
     license='BSD-3-Clause',
     packages=find_packages(),
-    extras_require={"voice-client": get_requirements("voice_client.txt"),
-                    "websocket-client": get_requirements("websocket_client.txt")},
+    extras_require={
+        "voice-client": get_requirements("voice_client.txt"),
+        "voice-client-mac": get_requirements("voice_client_mac.txt"),
+        "websocket-client": get_requirements("websocket_client.txt"),
+        },
     package_data={'neon_nodes': ['res/*']},
     zip_safe=True,
     classifiers=[
