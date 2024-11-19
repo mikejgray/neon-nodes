@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a2](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a2) (2024-11-19)
+
+[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a1...0.0.2a2)
+
+**Merged pull requests:**
+
+- feat: run a Node on Mac OS [\#18](https://github.com/NeonGeckoCom/neon-nodes/pull/18) ([mikejgray](https://github.com/mikejgray))
+
 ## [0.0.2a1](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a1) (2024-05-22)
 
 [Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.1...0.0.2a1)
