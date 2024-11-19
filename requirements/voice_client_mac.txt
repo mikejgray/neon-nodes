@@ -1,0 +1,12 @@
+neon-utils[network]~=1.9
+ovos-dinkum-listener==0.0.3a29
+ovos-vad-plugin-silero~=0.0.1
+ovos-microphone-plugin-pyaudio~=0.0.0
+ovos-ww-plugin-precise-lite[full]~=0.1.2
+pydub~=0.25
+SpeechRecognition~=3.10
+sdnotify~=0.3
+requests~=2.28
+mock~=5.0
+# TODO: Below patching unpinned dependency upstream allowing 2.0.0 which is incompatible
+numpy~=1.26
