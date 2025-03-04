@@ -1,5 +1,6 @@
 neon-utils[network]~=1.9
-ovos-dinkum-listener==0.0.3a29
+ovos-dinkum-listener~=0.2
+ovos-plugin-manager~=0.3
 # TODO: webrtcvad fails to run in OS image
 ovos-vad-plugin-silero~=0.0.1
 ovos-microphone-plugin-alsa~=0.0.0
@@ -12,3 +13,4 @@ requests~=2.28
 mock~=5.0
 # TODO: Below patching unpinned dependency upstream allowing 2.0.0 which is incompatible
 numpy~=1.26
+ovos-config~=0.1

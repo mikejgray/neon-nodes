@@ -27,6 +27,7 @@
 from mock import Mock
 from ovos_utils.log import LOG
 
+
 class MockTransformers(Mock):
     def transform(self, chunk):
         return chunk, dict()

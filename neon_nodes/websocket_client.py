@@ -28,7 +28,7 @@ import io
 import json
 import requests
 
-from os.path import join, isfile, dirname
+from os.path import join, dirname
 from threading import Thread, Event
 from unittest.mock import Mock
 from base64 import b64decode, b64encode
@@ -41,6 +41,7 @@ from ovos_config.config import Configuration
 from ovos_utils.messagebus import FakeBus
 from ovos_utils.log import LOG
 from ovos_bus_client.message import Message
+from neon_utils.log_utils import init_log
 from neon_utils.net_utils import get_adapter_info
 from neon_utils.user_utils import get_default_user_config
 from speech_recognition import AudioData
@@ -91,19 +92,25 @@ class NeonWebsocketClient:
                                       on_close=ws_disconnect)
         Thread(target=self.websocket.run_forever, daemon=True).start()
         self._device_data = self.config.get('neon_node', {})
-        LOG.init(self.config.get("logging"))
+        init_log(self.config, "neon-node")
         self.bus = bus or FakeBus()
         self.lang = self.config.get('lang') or "en-us"
-        self._mic = OVOSMicrophoneFactory.create(self.config)
+
+        mic_config = self.config.get('microphone')
+        if not mic_config:
+            raise RuntimeError(f"No microphone config in "
+                               f"{self.config.xdg_configs[0].path}")
+        self._mic = OVOSMicrophoneFactory.create(mic_config)
         self._mic.start()
         self._hotwords = HotwordContainer(self.bus)
-        self._hotwords.load_hotword_engines()
+        self._hotwords.load_hotword_engines()  # Hanging here trying to open the mic
+        LOG.debug("Loaded hotwords")
         self._vad = OVOSVADFactory.create(self.config)
-
+        LOG.debug("Loaded VAD")
         self._voice_loop = DinkumVoiceLoop(mic=self._mic,
                                            hotwords=self._hotwords,
-                                           stt=Mock(),
-                                           fallback_stt=Mock(),
+                                           stt=Mock(transcribe=Mock(return_value=None)),
+                                           fallback_stt=None,
                                            vad=self._vad,
                                            transformers=MockTransformers(),
                                            stt_audio_callback=self.on_stt_audio,
@@ -137,9 +144,9 @@ class NeonWebsocketClient:
         Get an AudioSegment representation of the configured listening sound
         """
         if not self._listening_sound:
-            res_file = Configuration().get('sounds').get('start_listening')
-            if not isfile(res_file):
-                res_file = join(dirname(__file__), "res", "start_listening.wav")
+            default_file = join(dirname(__file__), "res", "start_listening.wav")
+            res_file = Configuration().get('sounds', {}).get('start_listening')\
+                or default_file
             self._listening_sound = AudioSegment.from_file(res_file,
                                                            format="wav")
         return self._listening_sound
@@ -150,9 +157,9 @@ class NeonWebsocketClient:
         Get an AudioSegment representation of the configured error sound
         """
         if not self._error_sound:
-            res_file = Configuration().get('sounds').get('error')
-            if not isfile(res_file):
-                res_file = join(dirname(__file__), "res", "error.wav")
+            default_file = join(dirname(__file__), "res", "error.wav")
+            res_file = Configuration().get('sounds', {}).get('error') or \
+                default_file
             self._error_sound = AudioSegment.from_file(res_file, format="wav")
         return self._error_sound
 
