@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a4](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a4) (2025-03-04)
+
+[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a3...0.0.2a4)
+
+**Merged pull requests:**
+
+- Handle invalid `sounds` configuration [\#21](https://github.com/NeonGeckoCom/neon-nodes/pull/21) ([NeonDaniel](https://github.com/NeonDaniel))
+
 ## [0.0.2a3](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a3) (2025-03-04)
 
 [Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a2...0.0.2a3)
