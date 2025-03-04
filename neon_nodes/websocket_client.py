@@ -147,8 +147,13 @@ class NeonWebsocketClient:
             default_file = join(dirname(__file__), "res", "start_listening.wav")
             res_file = Configuration().get('sounds', {}).get('start_listening')\
                 or default_file
-            self._listening_sound = AudioSegment.from_file(res_file,
-                                                           format="wav")
+            try:
+                self._listening_sound = AudioSegment.from_file(res_file,
+                                                               format="wav")
+            except Exception as e:
+                LOG.error(f"Using default listening sound. e={e}")
+                self._listening_sound = AudioSegment.from_file(default_file,
+                                                               format="wav")
         return self._listening_sound
 
     @property
@@ -160,7 +165,13 @@ class NeonWebsocketClient:
             default_file = join(dirname(__file__), "res", "error.wav")
             res_file = Configuration().get('sounds', {}).get('error') or \
                 default_file
-            self._error_sound = AudioSegment.from_file(res_file, format="wav")
+            try:
+                self._error_sound = AudioSegment.from_file(res_file,
+                                                           format="wav")
+            except Exception as e:
+                LOG.error(f"Using default error sound. e={e}")
+                self._error_sound = AudioSegment.from_file(default_file,
+                                                           format="wav")
         return self._error_sound
 
     @property
