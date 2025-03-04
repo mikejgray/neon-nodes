@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a3](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a3) (2025-03-04)
+
+[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a2...0.0.2a3)
+
+**Merged pull requests:**
+
+- Update for newer OVOS dependency compat [\#20](https://github.com/NeonGeckoCom/neon-nodes/pull/20) ([NeonDaniel](https://github.com/NeonDaniel))
+
 ## [0.0.2a2](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a2) (2024-11-19)
 
 [Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a1...0.0.2a2)
