@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a5](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a5) (2025-05-30)
+
+[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a4...0.0.2a5)
+
+**Merged pull requests:**
+
+- Add Container build files and automation [\#19](https://github.com/NeonGeckoCom/neon-nodes/pull/19) ([NeonDaniel](https://github.com/NeonDaniel))
+
 ## [0.0.2a4](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a4) (2025-03-04)
 
 [Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a3...0.0.2a4)
