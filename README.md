@@ -23,3 +23,17 @@ neon_node:
   hana_username: node_user  # Hana node user username
   hana_password: node_password  # Hana node user password
 ```
+
+## Running with Docker
+To run Docker containers, the host system must have a Pulse server running.
+
+### Websocket Client
+```shell
+docker run \
+  -v ${XDG_RUNTIME_DIR}/pulse:${XDG_RUNTIME_DIR}/pulse \
+  -v ~/.config/pulse/cookie:/tmp/pulse_cookie\
+  -e PULSE_COOKIE=/tmp/pulse_cookie \
+  -e PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native \
+  --device /dev/snd \
+  neon-node-websocket
+```

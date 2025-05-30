@@ -4,6 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
+  docker_build_test_websocket:
+    uses: neongeckocom/.github/.github/workflows/docker_build_tests.yml@master
+    with:
+      dockerfile: dockerfiles/websocket.dockerfile
+  docker_build_test_voice:
+    uses: neongeckocom/.github/.github/workflows/docker_build_tests.yml@master
+    with:
+      dockerfile: dockerfiles/voice.dockerfile
   py_build_tests:
     uses: neongeckocom/.github/.github/workflows/python_build_tests.yml@master
     with:

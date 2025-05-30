@@ -1,12 +1,20 @@
+log_level: DEBUG
+logs:
+  level_overrides:
+    error:
+      - pika
+    warning:
+      - filelock
+    info:
+      - openai
+    debug: []
 neon_node:
-  description: Neon Node
-  # TODO: Stable release address
-  hana_address: https://hana.neonaibeta.com
+  description: Neon Docker Node
+  hana_address: "https://hana.neonaibeta.com"
   hana_username: neon_node_demo
   hana_password: NeonDemo
 microphone:
-  module: ovos-microphone-plugin-alsa # Comment this line for Mac OS
-  # module: ovos-microphone-plugin-pyaudio # Uncomment this line for Mac OS
+  module: ovos-microphone-plugin-alsa
 listener:
   sample_rate: 16000
   wake_word: hey_mycroft
@@ -42,6 +50,3 @@ hotwords:
     enabled: false
   wake_up_vosk:
     enabled: false
-logs:
-  path: stdout
-  level: DEBUG
