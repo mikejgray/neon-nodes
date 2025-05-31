@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a6](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a6) (2025-05-31)
+
+[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a5...0.0.2a6)
+
+**Merged pull requests:**
+
+- Update to support optional SSL for HTTP and WS connections [\#23](https://github.com/NeonGeckoCom/neon-nodes/pull/23) ([NeonDaniel](https://github.com/NeonDaniel))
+
 ## [0.0.2a5](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a5) (2025-05-30)
 
 [Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a4...0.0.2a5)
