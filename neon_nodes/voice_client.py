@@ -61,6 +61,7 @@ class NeonVoiceClient:
         self.config = Configuration()
         self._node_config = self.config.get('neon_node', {})
         self._hana_address = self._node_config.get('hana_address')
+        self._ssl_verify = self._node_config.get('ssl_verify', True)
 
         init_log(self.config, "neon-node")
         self.bus = bus or FakeBus()
@@ -236,7 +237,8 @@ class NeonVoiceClient:
         transcript = request_backend("neon/get_stt",
                                      {"encoded_audio": audio_data,
                                       "lang_code": self.lang},
-                                     server_url=self._hana_address)
+                                     server_url=self._hana_address,
+                                     ssl_verify=self._ssl_verify)
         transcribed = transcript['transcripts'][0]
         LOG.info(transcribed)
         response = request_backend("neon/get_response",
@@ -244,12 +246,14 @@ class NeonVoiceClient:
                                     "user_profile": self.user_profile,
                                     "node_data": self.node_data,
                                     "utterance": transcribed},
-                                   server_url=self._hana_address)
+                                   server_url=self._hana_address,
+                                   ssl_verify=self._ssl_verify)
         answer = response['answer']
         LOG.info(answer)
         audio = request_backend("neon/get_tts", {"lang_code": self.lang,
                                                  "to_speak": answer},
-                                server_url=self._hana_address)
+                                server_url=self._hana_address,
+                                ssl_verify=self._ssl_verify)
         audio_bytes = b64decode(audio['encoded_audio'])
         play(AudioSegment.from_file(io.BytesIO(audio_bytes), format="wav"))
         LOG.info(f"Playback completed")

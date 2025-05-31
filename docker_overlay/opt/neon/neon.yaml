@@ -11,6 +11,7 @@ logs:
 neon_node:
   description: Neon Docker Node
   hana_address: "https://hana.neonaibeta.com"
+  ssl_verify: true
   hana_username: neon_node_demo
   hana_password: NeonDemo
 microphone:

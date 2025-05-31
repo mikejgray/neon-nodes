@@ -1,4 +1,4 @@
-neon-utils[network]~=1.9
+neon-utils[network]~=1.9,>=1.12.2a1
 ovos-dinkum-listener~=0.2
 ovos-plugin-manager~=0.3
 # TODO: webrtcvad fails to run in OS image

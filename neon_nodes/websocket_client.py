@@ -26,6 +26,7 @@
 
 import io
 import json
+import ssl
 import requests
 
 from os.path import join, dirname
@@ -62,11 +63,13 @@ class NeonWebsocketClient:
         self.config = Configuration()
         node_config = self.config["neon_node"]
         server_addr = node_config["hana_address"]
+        ssl_verify = node_config.get("ssl_verify", True)
         self._connected = Event()
-
+        LOG.info(f"SSL={ssl_verify}")
         auth_data = requests.post(f"{server_addr}/auth/login", json={
             "username": node_config["hana_username"],
-            "password": node_config["hana_password"]}).json()
+            "password": node_config["hana_password"]},
+            verify=ssl_verify).json()
         LOG.info(auth_data)
 
         def ws_connect(*_, **__):
@@ -85,12 +88,20 @@ class NeonWebsocketClient:
             raise ConnectionError(f"Failed to connect: {exception}")
 
         ws_address = server_addr.replace("http", "ws", 1)
+
+        # Configure SSL context for WebSocket if needed
+        sslopt = None
+        if not ssl_verify:
+            sslopt = {"cert_reqs": ssl.CERT_NONE, "check_hostname": False}
+
+
         self.websocket = WebSocketApp(f"{ws_address}/node/v1?token={auth_data['access_token']}",
                                       on_message=self._on_ws_data,
                                       on_open=ws_connect,
                                       on_error=ws_error,
                                       on_close=ws_disconnect)
-        Thread(target=self.websocket.run_forever, daemon=True).start()
+        Thread(target=self.websocket.run_forever, kwargs={"sslopt": sslopt},
+               daemon=True).start()
         self._device_data = self.config.get('neon_node', {})
         init_log(self.config, "neon-node")
         self.bus = bus or FakeBus()
