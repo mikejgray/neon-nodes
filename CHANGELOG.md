@@ -1,52 +1,40 @@
 # Changelog
 
-## [0.0.2a6](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a6) (2025-05-31)
+## [0.0.2a1](https://github.com/mikejgray/neon-nodes/tree/0.0.2a1) (2024-05-22)
 
-[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a5...0.0.2a6)
+[Full Changelog](https://github.com/mikejgray/neon-nodes/compare/0.0.1...0.0.2a1)
 
-**Merged pull requests:**
+## [0.0.1](https://github.com/mikejgray/neon-nodes/tree/0.0.1) (2024-04-05)
 
-- Update to support optional SSL for HTTP and WS connections [\#23](https://github.com/NeonGeckoCom/neon-nodes/pull/23) ([NeonDaniel](https://github.com/NeonDaniel))
+[Full Changelog](https://github.com/mikejgray/neon-nodes/compare/0.0.1a8...0.0.1)
 
-## [0.0.2a5](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a5) (2025-05-30)
+## [0.0.1a8](https://github.com/mikejgray/neon-nodes/tree/0.0.1a8) (2024-04-05)
 
-[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a4...0.0.2a5)
+[Full Changelog](https://github.com/mikejgray/neon-nodes/compare/0.0.1a7...0.0.1a8)
 
-**Merged pull requests:**
+## [0.0.1a7](https://github.com/mikejgray/neon-nodes/tree/0.0.1a7) (2024-02-28)
 
-- Add Container build files and automation [\#19](https://github.com/NeonGeckoCom/neon-nodes/pull/19) ([NeonDaniel](https://github.com/NeonDaniel))
+[Full Changelog](https://github.com/mikejgray/neon-nodes/compare/0.0.1a6...0.0.1a7)
 
-## [0.0.2a4](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a4) (2025-03-04)
+## [0.0.1a6](https://github.com/mikejgray/neon-nodes/tree/0.0.1a6) (2024-02-28)
 
-[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a3...0.0.2a4)
+[Full Changelog](https://github.com/mikejgray/neon-nodes/compare/0.0.1a5...0.0.1a6)
 
-**Merged pull requests:**
+## [0.0.1a5](https://github.com/mikejgray/neon-nodes/tree/0.0.1a5) (2024-02-28)
 
-- Handle invalid `sounds` configuration [\#21](https://github.com/NeonGeckoCom/neon-nodes/pull/21) ([NeonDaniel](https://github.com/NeonDaniel))
+[Full Changelog](https://github.com/mikejgray/neon-nodes/compare/0.0.1a4...0.0.1a5)
 
-## [0.0.2a3](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a3) (2025-03-04)
+## [0.0.1a4](https://github.com/mikejgray/neon-nodes/tree/0.0.1a4) (2024-02-28)
 
-[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a2...0.0.2a3)
+[Full Changelog](https://github.com/mikejgray/neon-nodes/compare/0.0.1a3...0.0.1a4)
 
-**Merged pull requests:**
+## [0.0.1a3](https://github.com/mikejgray/neon-nodes/tree/0.0.1a3) (2024-02-08)
 
-- Update for newer OVOS dependency compat [\#20](https://github.com/NeonGeckoCom/neon-nodes/pull/20) ([NeonDaniel](https://github.com/NeonDaniel))
+[Full Changelog](https://github.com/mikejgray/neon-nodes/compare/0.0.1a2...0.0.1a3)
 
-## [0.0.2a2](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a2) (2024-11-19)
+## [0.0.1a2](https://github.com/mikejgray/neon-nodes/tree/0.0.1a2) (2024-02-08)
 
-[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.2a1...0.0.2a2)
-
-**Merged pull requests:**
-
-- feat: run a Node on Mac OS [\#18](https://github.com/NeonGeckoCom/neon-nodes/pull/18) ([mikejgray](https://github.com/mikejgray))
-
-## [0.0.2a1](https://github.com/NeonGeckoCom/neon-nodes/tree/0.0.2a1) (2024-05-22)
-
-[Full Changelog](https://github.com/NeonGeckoCom/neon-nodes/compare/0.0.1...0.0.2a1)
-
-**Merged pull requests:**
-
-- Implement websocket client class [\#14](https://github.com/NeonGeckoCom/neon-nodes/pull/14) ([NeonDaniel](https://github.com/NeonDaniel))
+[Full Changelog](https://github.com/mikejgray/neon-nodes/compare/3b96078f255fadc0071181acf1b1a4a041b1fa24...0.0.1a2)
 
 
 
